@@ -1,18 +1,18 @@
 ---
-const { post: { title, description } } = Astro.props;
+const { post: { title, description, content, created_at, id } } = Astro.props;
 ---
-<article>
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href={`/posts/${id}`}>
+        <article>
             <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1682687219612-b12805df750d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-        </a>
-        <div class="p-5">
-            <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-            </a>       
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-200">{description}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Ut do excepteur nulla qui eiusmod nostrud mollit id do. Culpa ad incididunt cillum nisi adipisicing voluptate laborum cillum amet nisi cillum culpa ut do. Velit officia culpa aute est irure aliqua incididunt commodo nulla. Consectetur magna reprehenderit ea deserunt ea enim.</p>
-            <p class="mb-3 text-xs text-gray-700 dark:text-gray-500">10/12/2023 - 16 min read</p>
-        </div>
-    </div>
-</article>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
+                </a>       
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-200">{description}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{content.slice(0, 100)+'...'}</p>
+                <p class="mb-3 text-xs text-gray-700 dark:text-gray-500">{new Date(created_at).toLocaleDateString()} - 16 min read</p>
+            </div>
+        </article>
+    </a>
+</div>

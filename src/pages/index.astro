@@ -1,20 +1,21 @@
 ---
 import Post from '../components/Post.astro';
----
+import DefaultLayout from '../layouts/DefaultLayout.astro';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		<Post post={{ title: "titulo", description: "descripcion" }}/>
-		<Post post={{ title: "titulo1", description: "descripcion1" }}/>
-		<Post post={{ title: "titulo2", description: "descripcion2" }}/>
-		<Post post={{ title: "titulo3", description: "descripcion3" }}/>
-	</body>
-</html>
+const res = await fetch('http://localhost:3000/posts');
+const posts = await res.json();
+export const prerender = true
+---
+<DefaultLayout>
+	<!-- <meta slot="header" charset="utf-8" />
+	<link slot="header" rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta slot="header" name="viewport" content="width=device-width" />
+	<meta slot="header" name="generator" content={Astro.generator} /> -->
+
+	<h1 class="text-center text-4xl font-medium my-4">POSTS</h1>
+	<section class="container mx-auto grid grid-cols-4 gap-4">
+	{
+		posts.map(post => <Post post={post}/>)
+	}
+	</section>
+</DefaultLayout>
